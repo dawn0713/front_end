@@ -7,7 +7,7 @@ export function fetchList(params) {
   })
 }
 
-export function deleteOrder(params) {
+export function deleteApplication(params) {
     return request({
         url:'/api_proxy/apps/apps/',
         method:'delete',
