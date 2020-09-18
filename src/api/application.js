@@ -1,5 +1,6 @@
 import request from '@/utils/request'
 export function fetchList(params) {
+    debugger
     return request({
         url:'/api_proxy/apps/apps_list/',
         method:'get',
