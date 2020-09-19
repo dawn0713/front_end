@@ -58,31 +58,31 @@
                 style="width: 100%;"
                 v-loading="listLoading" border>
         <el-table-column prop="id" label="编号"  align="center">
-            <template slot-scope="scope">{{scope.row.id}}</template>
+            <template slot-scope="scope">{{scope.row.app_id}}</template>
         </el-table-column>
         <el-table-column prop="name" label="设备名称"  align="center">
-            <template slot-scope="scope">{{scope.row.appName}}</template>
+            <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
         <el-table-column prop="ip" label="ip"  align="center">
             <template slot-scope="scope">{{scope.row.ip}}</template>
         </el-table-column>
         <el-table-column prop="port" label="端口号"  align="center">
-            <template slot-scope="scope">￥{{scope.row.port}}</template>
+            <template slot-scope="scope">{{scope.row.port}}</template>
         </el-table-column>
         <el-table-column prop="url" label="url"  align="center">
-            <template slot-scope="scope">￥{{scope.row.url}}</template>
+            <template slot-scope="scope">{{scope.row.url}}</template>
         </el-table-column>
         <el-table-column prop="proto" label="网络协议"  align="center">
-            <template slot-scope="scope">￥{{scope.row.proto}}</template>
+            <template slot-scope="scope">{{scope.row.proto}}</template>
         </el-table-column>
         <el-table-column prop="desc" label="备注" align="center">
-            <template slot-scope="scope">￥{{scope.row.desc}}</template>
+            <template slot-scope="scope">{{scope.row.desc}}</template>
         </el-table-column>
         <el-table-column prop="create_time" label="创建时间"  align="center">
-            <template slot-scope="scope">{{scope.row.createTime | formatCreateTime}}</template>
+            <template slot-scope="scope">{{scope.row.create_time | formatCreateTime}}</template>
         </el-table-column>
         <el-table-column prop="update_time" label="更新时间"  align="center">
-            <template slot-scope="scope">{{scope.row.updateTime | formatCreateTime}}</template>
+            <template slot-scope="scope">{{scope.row.update_time | formatCreateTime}}</template>
         </el-table-column>
         <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
