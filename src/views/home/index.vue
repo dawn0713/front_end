@@ -4,17 +4,17 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <div class="out-border">
-            <div class="layout-title">后台项目</div>
+            <div class="layout-title">集群信息</div>
             <div class="color-main address-content">
-              <a href="https://github.com/macrozheng/mall">mall</a>
+              <a href="https://172.17.0.2:8443">kubernetes-info</a>
             </div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="out-border">
-            <div class="layout-title">前端项目</div>
+            <div class="layout-title">消息队列</div>
             <div class="color-main address-content">
-              <a href="https://github.com/macrozheng/mall-admin-web">mall-admin-web</a>
+              <a href="http://127.0.0.1:4171/">nsq-info</a>
             </div>
           </div>
         </el-col>
