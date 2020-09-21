@@ -1,10 +1,32 @@
 <template>
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
-      <el-form-item label="设备名称" prop="appname">
+      <el-form-item label="规则名称" prop="appname">
         <el-input v-model="user.appname"></el-input>
       </el-form-item>
-      <el-form-item label="Ip">
+      <el-form-item label="规则类型" placeholder="请选择规则类型" prop="proto">
+        <el-select v-model="user.proto">
+          <el-option label="设备解析类" value="parse_device"></el-option>
+          <el-option label="告警通知类" value="rt_event"></el-option>
+          <el-option label="数据入库类" value="rt_db"></el-option>
+          <el-option label="设备下发类" value="rt_device"></el-option>
+          <el-option label="转入第三方服务类" value="rt_nsq"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="proto">
+        <el-select v-model="user.proto">
+          <el-option label="python" value="python"></el-option>
+          <el-option label="json" value="json"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="规则内容">
+        <el-input
+          placeholder="请输入内容"
+          type="textarea"
+          v-model="user.note"
+          :autosize="true"></el-input>
+      </el-form-item>
+      <!-- <el-form-item label="Ip">
         <el-input v-model="user.ip"></el-input>
       </el-form-item>
       <el-form-item label="端口号">
@@ -12,15 +34,8 @@
       </el-form-item>
       <el-form-item label="url">
         <el-input v-model="user.url"></el-input>
-      </el-form-item>
-      <el-form-item label="网络协议" placeholder="请选择使用的网络协议" prop="proto">
-        <el-select v-model="user.proto">
-          <el-option label="UDP" value="UDP"></el-option>
-          <el-option label="TCP" value="TCP"></el-option>
-          <el-option label="HTTP" value="HTTP"></el-option>
-          <el-option label="MQTT" value="MQTT"></el-option>
-        </el-select>
-      </el-form-item>
+      </el-form-item> -->
+
       <el-form-item label="备注">
         <el-input
           placeholder="请输入内容"
@@ -28,7 +43,18 @@
           v-model="user.note"
           :autosize="true"></el-input>
       </el-form-item>
-      
+      <el-form-item label="规则有效期">
+        <el-date-picker
+          v-model="value1"
+          type="datetimerange"
+          range-separator="至"
+          start-placeholder="生效时间"
+          end-placeholder="失效时间">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item>
+        <el-checkbox v-model="checked">是否启用</el-checkbox>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>
@@ -69,7 +95,9 @@
           proto: [
             {required: true, message: '请输入密码', trigger: 'blur'},
           ]
-        }
+        },
+        checked: true,
+        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
       }
     },
     created() {
