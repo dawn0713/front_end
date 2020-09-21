@@ -21,11 +21,11 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="输入搜索：">
-            <el-input v-model="listQuery.appName" class="input-width" placeholder="设备名称"></el-input>
+            <el-input v-model="listQuery.appName" class="input-width" placeholder="通知人名称"></el-input>
           </el-form-item>
-          <el-form-item label="ip：">
+          <!-- <el-form-item label="IP：">
             <el-input v-model="listQuery.ip" class="input-width"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="创建时间：">
             <el-date-picker
               class="input-width"
@@ -35,7 +35,7 @@
               placeholder="请选择时间">
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="网络协议">
+          <el-form-item label="通知类型">
             <el-select v-model="listQuery.proto" class="input-width" placeholder="全部" clearable>
               <el-option v-for="item in statusOptions"
                          :key="item.value"
@@ -49,7 +49,7 @@
     </el-card>
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
-      <span>应用列表</span>
+      <span>通知人列表</span>
     </el-card>
     <div class="table-container">
       <el-table 
@@ -136,20 +136,24 @@
         total: null,
         statusOptions: [
           {
-            label: 'TCP',
+            label: '邮箱通知',
             value: 0
           },
           {
-            label: 'UDP',
+            label: '短信通知',
             value: 1
           },
           {
-            label: 'HTTP',
+            label: '微信通知',
             value: 2
           },
           {
-            label: 'MQTT',
+            label: '语音通知',
             value: 3
+          },
+          {
+            label: '第三方通知',
+            value: 4
           }
         ]
         // tableData : [{

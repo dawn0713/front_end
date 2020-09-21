@@ -110,14 +110,22 @@ export const constantRouterMap = [
       }]
   },
   {
-    path: '',
+    path: '/notification',
     component: Layout,
-    redirect: '/notification',
+    name: 'notification',
+    meta: {title:'通知管理'},
+    //redirect: '/notification',
     children: [{
-      path: 'notification',
-      name: 'notification',
-      component: () => import('@/views/home/index'),
-      meta: {title: '通知管理'}
+      path: 'notifications',
+      name: 'notifications',
+      component: () => import('@/views/notifier/index'),
+      meta: {title: '通知人列表'}
+    },
+    {
+      path: 'notifer_add',
+      name: 'notifier_add',
+      component: () => import('@/views/notifier/add'),
+      meta: {title: '添加通知人'}
     }]
   },
   // {
