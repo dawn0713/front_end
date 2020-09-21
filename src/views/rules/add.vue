@@ -4,7 +4,7 @@
       <el-form-item label="规则名称" prop="appname">
         <el-input v-model="user.appname"></el-input>
       </el-form-item>
-      <el-form-item label="规则类型" placeholder="请选择规则类型" prop="proto">
+      <el-form-item label="规则类型" placeholder="请选择规则类型" prop="type">
         <el-select v-model="user.proto">
           <el-option label="设备解析类" value="parse_device"></el-option>
           <el-option label="告警通知类" value="rt_event"></el-option>
@@ -13,7 +13,7 @@
           <el-option label="转入第三方服务类" value="rt_nsq"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="proto">
+      <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="format">
         <el-select v-model="user.proto">
           <el-option label="python" value="python"></el-option>
           <el-option label="json" value="json"></el-option>
@@ -23,24 +23,14 @@
         <el-input
           placeholder="请输入内容"
           type="textarea"
-          v-model="user.note"
+          v-model="user.content"
           :autosize="true"></el-input>
       </el-form-item>
-      <!-- <el-form-item label="Ip">
-        <el-input v-model="user.ip"></el-input>
-      </el-form-item>
-      <el-form-item label="端口号">
-        <el-input v-model="user.port"></el-input>
-      </el-form-item>
-      <el-form-item label="url">
-        <el-input v-model="user.url"></el-input>
-      </el-form-item> -->
-
       <el-form-item label="备注">
         <el-input
           placeholder="请输入内容"
           type="textarea"
-          v-model="user.note"
+          v-model="user.description"
           :autosize="true"></el-input>
       </el-form-item>
       <el-form-item label="规则有效期">
@@ -89,15 +79,18 @@
         user: Object.assign({}, defaultUser),
         rules: {
           appname: [
-            {required: true, message: '请输入用户名称', trigger: 'blur'},
+            {required: true, message: '请输入规则名称', trigger: 'blur'},
             {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
           ],
-          proto: [
-            {required: true, message: '请输入密码', trigger: 'blur'},
+          type: [
+            {required: true, message: '请选择规则类型', trigger: 'blur'},
+          ],
+          format: [
+            {required: true, message: '请选择规则格式', trigger: 'blur'},
           ]
         },
         checked: true,
-        value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
+        value1: [new Date(2020, 10, 10, 10, 10), new Date(2020, 10, 11, 10, 10)],
       }
     },
     created() {
