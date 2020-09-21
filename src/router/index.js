@@ -64,48 +64,54 @@ export const constantRouterMap = [
     }]
   },
   {
-    path: '/rule_engine',
+    path: '/rules',
     component: Layout,
     // redirect: '/pms/product',
-    name: 'rule_engine',
-    meta: {title: '引擎规则'},
+    name: 'rules',
+    meta: {title: '规则引擎'},
     children: [{
-      path: 'parse_device',
-      name: 'parse_device',
-      component: () => import('@/views/pms/product/index'),
-      meta: {title: '创建设备数据解析规则'}
+      path: 'add',
+      name: 'add',
+      component: () => import('@/views/rules/add'),
+      meta: {title: '创建规则'}
+      },
+      {
+        path: 'parse_device',
+        name: 'parse_device',
+        component: () => import('@/views/rules/index'),
+        meta: {title: '设备解析类规则'}
       },
       {
         path: 'rt_packet',
         name: 'rt_packet',
-        component: () => import('@/views/pms/product/add'),
+        component: () => import('@/views/rules/index'),
         meta: {title: '数据流转类规则'}
       },
       {
         path: 'rt_event',
         name: 'rt_event',
-        component: () => import('@/views/pms/product/update'),
+        component: () => import('@/views/rules/index'),
         meta: {title: '告警通知类规则'}
         // hidden: true
       },
       {
         path: 'rt_db',
         name: 'rt_db',
-        component: () => import('@/views/pms/product/index'),
+        component: () => import('@/views/rules/index'),
         meta: {title: '入库类规则'}
         // hidden: true
       },
       {
         path: 'rt_nsq',
         name: 'rt_nsq',
-        component: () => import('@/views/pms/product/index'),
-        meta: {title: '入其他topic类规则'}
+        component: () => import('@/views/rules/index'),
+        meta: {title: '入第三方业务类规则'}
         // hidden: true
       },
       {
         path: 'rt_device',
         name: 'rt_device',
-        component: () => import('@/views/pms/productCate/index'),
+        component: () => import('@/views/rules/index'),
         meta: {title: '设备下发类规则'}
       }]
   },
