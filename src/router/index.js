@@ -132,7 +132,14 @@ export const constantRouterMap = [
       name: 'notifier_add',
       component: () => import('@/views/notifier/add'),
       meta: {title: '添加通知人'}
-    }]
+    },
+    {
+      path: 'mail_add',
+      name: 'mail_add',
+      component: () => import('@/views/notifier/add_mail'),
+      meta: {title: '添加邮件通知人'}
+    }
+  ]
   },
   // {
   //   path: '/sysinfo',
