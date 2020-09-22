@@ -1,10 +1,15 @@
 <template>
   <div class="app-wrapper" :class="classObj">
     <sidebar class="sidebar-container"></sidebar>
-    <div class="main-container">
+    <el-scrollbar
+        wrapClass="scrollbar-wrap"
+        :style="{height: scrollHeight}"
+        ref="scrollbarContainer">
+    <div class="main-container" overflow="scroll">
       <navbar></navbar>
       <app-main></app-main>
     </div>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -34,7 +39,10 @@ export default {
         mobile: this.device === 'mobile'
       }
     }
-  }
+  },
+  mounted(){
+        this.scrollHeight = window.innerHeight*0.7 + 'px';
+    }
 }
 </script>
 
@@ -46,4 +54,13 @@ export default {
     height: 100%;
     width: 100%;
   }
+  .el-scrollbar{
+      height: 90%;
+      .scrollbar-wrap {
+        overflow-x: hidden;
+      }
+      .el-scrollbar__bar{
+        
+      }
+}
 </style>

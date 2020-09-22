@@ -1,11 +1,15 @@
 <template>
   <el-card class="form-container" shadow="never">
-    <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
+       <el-scrollbar
+        wrapClass="scrollbar-wrap"
+        :style="{height: scrollHeight}"
+        ref="scrollbarContainer">
+    <el-form :model="user" :rules="rules" ref="userForm" label-width="150px" :show-overflow-tooltip=true>
       <el-form-item label="规则名称" prop="appname">
         <el-input v-model="user.appname"></el-input>
       </el-form-item>
       <el-form-item label="规则类型" placeholder="请选择规则类型" prop="type">
-        <el-select v-model="user.proto">
+        <el-select v-model="user.type">
           <el-option label="设备解析类" value="parse_device"></el-option>
           <el-option label="告警通知类" value="rt_event"></el-option>
           <el-option label="数据入库类" value="rt_db"></el-option>
@@ -14,17 +18,19 @@
         </el-select>
       </el-form-item>
       <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="format">
-        <el-select v-model="user.proto">
+        <el-select v-model="user.format">
           <el-option label="python" value="python"></el-option>
           <el-option label="json" value="json"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="规则内容">
+      <el-form-item label="规则内容" :show-overflow-tooltip=true>
         <el-input
           placeholder="请输入内容"
           type="textarea"
           v-model="user.content"
-          :autosize="true"></el-input>
+          :autosize="true"
+          >
+          </el-input>
       </el-form-item>
       <el-form-item label="备注">
         <el-input
@@ -50,7 +56,8 @@
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>
       </el-form-item>
     </el-form>
-  </el-card>
+    </el-scrollbar>
+  </el-card> 
 </template>
 
 <script>
@@ -77,6 +84,7 @@
     data() {
       return {
         user: Object.assign({}, defaultUser),
+        scrollHeight:'0px',
         rules: {
           appname: [
             {required: true, message: '请输入规则名称', trigger: 'blur'},
@@ -147,10 +155,25 @@
         this.$refs[formName].resetFields();
         this.user = Object.assign({}, defaultUser);
       }
+    },
+    mounted(){
+        this.scrollHeight = window.innerHeight*0.7 + 'px';
     }
   }
 </script>
 
-<style>
+<style >
 
+.el-tooltip__popper{
+  max-width:30%
+}
+.el-scrollbar{
+      height: 90%;
+      .scrollbar-wrap {
+        overflow-x: hidden;
+      }
+      .el-scrollbar__bar{
+        
+      }
+}
 </style>
