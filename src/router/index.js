@@ -52,23 +52,23 @@ export const constantRouterMap = [
       }
       ]
   },
-  {
-    path: '',
-    component: Layout,
-    redirect: '/device',
-    children: [{
-      path: 'device',
-      name: 'device',
-      component: () => import('@/views/devices/index'),
-      meta: {title: '设备管理'}
-    }]
-  },
+  // {
+  //   path: '',
+  //   component: Layout,
+  //   redirect: '/device',
+  //   children: [{
+  //     path: 'device',
+  //     name: 'device',
+  //     component: () => import('@/views/devices/index'),
+  //     meta: {title: '设备管理'}
+  //   }]
+  // },
   {
     path: '/rules',
     component: Layout,
     // redirect: '/pms/product',
     name: 'rules',
-    meta: {title: '规则引擎'},
+    meta: {title: '规则管理'},
     children: [{
       path: 'add',
       name: 'add',

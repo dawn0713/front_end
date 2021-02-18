@@ -1,16 +1,16 @@
 <template>
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
-      <el-form-item label="设备名称" prop="appname">
+      <el-form-item label="应用名称" prop="appname">
         <el-input v-model="user.appname"></el-input>
       </el-form-item>
-      <el-form-item label="Ip">
+      <el-form-item label="IP">
         <el-input v-model="user.ip"></el-input>
       </el-form-item>
-      <el-form-item label="端口号">
+      <el-form-item label="PORT">
         <el-input v-model="user.port"></el-input>
       </el-form-item>
-      <el-form-item label="url">
+      <el-form-item label="URL">
         <el-input v-model="user.url"></el-input>
       </el-form-item>
       <el-form-item label="网络协议" placeholder="请选择使用的网络协议" prop="proto">

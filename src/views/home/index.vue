@@ -34,21 +34,21 @@
           <div class="total-frame">
             <img :src="img_home_order" class="total-icon">
             <div class="total-title">接入应用总量</div>
-            <div class="total-value">200</div>
+            <div class="total-value">6</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="total-frame">
             <img :src="img_home_today_amount" class="total-icon">
             <div class="total-title">设备在线总量</div>
-            <div class="total-value">50000</div>
+            <div class="total-value">60201</div>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="total-frame">
             <img :src="img_home_yesterday_amount" class="total-icon">
             <div class="total-title">系统规则总量</div>
-            <div class="total-value">300</div>
+            <div class="total-value">320</div>
           </div>
         </el-col>
       </el-row>
