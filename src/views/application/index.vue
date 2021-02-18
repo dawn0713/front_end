@@ -21,9 +21,9 @@
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
           <el-form-item label="输入搜索：">
-            <el-input v-model="listQuery.appName" class="input-width" placeholder="设备名称"></el-input>
+            <el-input v-model="listQuery.appName" class="input-width" placeholder="应用名称"></el-input>
           </el-form-item>
-          <el-form-item label="ip：">
+          <el-form-item label="IP">
             <el-input v-model="listQuery.ip" class="input-width"></el-input>
           </el-form-item>
           <el-form-item label="创建时间：">
@@ -60,16 +60,16 @@
         <el-table-column prop="id" label="编号"  align="center">
             <template slot-scope="scope">{{scope.row.app_id}}</template>
         </el-table-column>
-        <el-table-column prop="name" label="设备名称"  align="center">
+        <el-table-column prop="name" label="应用名称"  align="center">
             <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
-        <el-table-column prop="ip" label="ip"  align="center">
+        <el-table-column prop="ip" label="IP"  align="center">
             <template slot-scope="scope">{{scope.row.ip}}</template>
         </el-table-column>
-        <el-table-column prop="port" label="端口号"  align="center">
+        <el-table-column prop="port" label="PORT"  align="center">
             <template slot-scope="scope">{{scope.row.port}}</template>
         </el-table-column>
-        <el-table-column prop="url" label="url"  align="center">
+        <el-table-column prop="url" label="URL"  align="center">
             <template slot-scope="scope">{{scope.row.url}}</template>
         </el-table-column>
         <el-table-column prop="proto" label="网络协议"  align="center">
