@@ -56,6 +56,28 @@ src -- 源码目录
     ├── account -- 账号管理页面
 ```
 
+### 项目布局
+```
+src -- 源码目录
+├── manage.py -- Django命令行工具
+├── admin -- 登录管理
+├── pyconf -- 项目配置文件
+├── pyutil -- 数据库连接等基础组件
+├── common_api -- 业务逻辑处理
+├── rules -- 规则类资源管理
+├── system -- 系统信息管理
+├── accounts -- 账号管理类资源管理
+├── notifers -- 用户通知资源管理
+├── apps -- 设备应用类资源View
+    ├── urls.py -- 二级URL路由
+    ├── *_views.py -- 视图文件
+└── lemon_api -- Django项目容器
+    ├── __init__.py -- python包必须
+    ├── wsgi.py -- Web服务器入库
+    ├── settings.py -- Django配置信息 
+    ├── urls.py -- URL路由
+```
+
 ## 搭建步骤
 - 下载node并安装：[https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi](https://nodejs.org/dist/v8.9.4/node-v8.9.4-x64.msi);
 - 该项目为前后端分离项目，访问本地访问接口需搭建后台环境，搭建请参考后端项目[传送门](https://github.com/macrozheng/mall);

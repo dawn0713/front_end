@@ -57,7 +57,7 @@
                 :data="list"
                 style="width: 100%;"
                 v-loading="listLoading" border>
-        <el-table-column prop="id" label="编号"  align="center">
+        <el-table-column prop="id" label="序号"  align="center">
             <template slot-scope="scope">{{scope.row.app_id}}</template>
         </el-table-column>
         <el-table-column prop="name" label="应用名称"  align="center">

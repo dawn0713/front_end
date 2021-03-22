@@ -1,14 +1,26 @@
 <template>
   <el-card class="form-container" shadow="never">
-       <el-scrollbar
+       <!-- <el-scrollbar
         wrapClass="scrollbar-wrap"
         :style="{height: scrollHeight}"
-        ref="scrollbarContainer">
+        ref="scrollbarContainer"> -->
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px" :show-overflow-tooltip=true>
       <el-form-item label="规则名称" prop="appname">
         <el-input v-model="user.appname"></el-input>
       </el-form-item>
-      <el-form-item label="规则类型" placeholder="请选择规则类型" prop="type">
+      <el-form-item label="描述" prop="desc">
+        <el-input placeholder="简要介绍规则内容" type="textarea" v-model="user.description" :autosize="true"></el-input>
+      </el-form-item>
+      <el-form-item label="数据来源" prop="data_from">
+        <el-input
+          placeholder="数据筛选"
+          type="textarea"
+          v-model="user.content"
+          :autosize="true"
+          >
+          </el-input>        
+      </el-form-item>
+      <el-form-item label="数据类型" placeholder="请选择规则类型" prop="type">
         <el-select v-model="user.type">
           <el-option label="设备解析类" value="parse_device"></el-option>
           <el-option label="告警通知类" value="rt_event"></el-option>
@@ -17,27 +29,20 @@
           <el-option label="转入第三方服务类" value="rt_nsq"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="format">
-        <el-select v-model="user.format">
-          <el-option label="python" value="python"></el-option>
-          <el-option label="json" value="json"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="规则内容" :show-overflow-tooltip=true>
-        <el-input
-          placeholder="请输入内容"
+      <el-form-item label="数据目的地" prop="data_output">
+          <el-input
+          placeholder="请输入详细内容"
           type="textarea"
           v-model="user.content"
           :autosize="true"
           >
           </el-input>
-      </el-form-item>
-      <el-form-item label="备注">
-        <el-input
-          placeholder="请输入内容"
-          type="textarea"
-          v-model="user.description"
-          :autosize="true"></el-input>
+      </el-form-item>  
+      <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="format">
+        <el-select v-model="user.format">
+          <el-option label="python" value="python"></el-option>
+          <el-option label="json" value="json"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="规则有效期">
         <el-date-picker
@@ -48,15 +53,25 @@
           end-placeholder="失效时间">
         </el-date-picker>
       </el-form-item>
+            <el-form-item label="调试数据" :show-overflow-tooltip=true>
+        <el-input
+          placeholder="请输入内容"
+          type="textarea"
+          v-model="user.content"
+          :autosize="true"
+          >
+          </el-input>
+      </el-form-item>
       <el-form-item>
         <el-checkbox v-model="checked">是否启用</el-checkbox>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>
+        <el-button @click="onSubmit('userForm')">调试规则</el-button>
       </el-form-item>
     </el-form>
-    </el-scrollbar>
+    <!-- </el-scrollbar> -->
   </el-card> 
 </template>
 
