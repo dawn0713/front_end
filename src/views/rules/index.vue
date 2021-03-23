@@ -58,7 +58,7 @@
                 style="width: 100%;"
                 v-loading="listLoading" border>
         <el-table-column prop="id" label="序号"  align="center">
-            <template slot-scope="scope">{{scope.row.app_id}}</template>
+            <template slot-scope="scope">{{scope.row.rule_id}}</template>
         </el-table-column>
         <el-table-column prop="name" label="名称"  align="center">
             <template slot-scope="scope">{{scope.row.name}}</template>
@@ -67,13 +67,13 @@
             <template slot-scope="scope">{{scope.row.desc}}</template>
         </el-table-column>
         <el-table-column prop="port" label="启用状态"  align="center">
-            <template slot-scope="scope">{{scope.row.port}}</template>
+            <template slot-scope="scope">{{scope.row.is_used}}</template>
         </el-table-column>
         <el-table-column prop="url" label="运行状态"  align="center">
-            <template slot-scope="scope">{{scope.row.url}}</template>
+            <template slot-scope="scope">{{scope.row.is_used}}</template> <!--to do -->
         </el-table-column>
-        <el-table-column prop="proto" label="创建时间"  align="center">
-            <template slot-scope="scope">{{scope.row.proto}}</template>
+        <el-table-column prop="create_time" label="创建时间"  align="center">
+            <template slot-scope="scope">{{scope.row.create_time | formatCreateTime}}</template>
         </el-table-column>
         <!-- <el-table-column prop="desc" label="备注" align="center">
             <template slot-scope="scope">{{scope.row.desc}}</template>
@@ -120,7 +120,7 @@
 
 
 <script>
-  import {fetchList, deleteApplication} from '@/api/application'
+  import {fetchList, deleteApplication} from '@/api/rules'
   import {formatDate} from '@/utils/date';
   const defaultListQuery = {
     pageNum: 1,
@@ -131,7 +131,7 @@
     proto: null
   };
   export default {
-    name: "ApplicationList",
+    name: "RulesList",
     data() {
       return {
         listQuery: Object.assign({}, defaultListQuery),
@@ -164,18 +164,6 @@
             value: 5          
           }
         ]
-        // tableData : [{
-        //     id: '1',
-        //     name: 'yudian',
-        //     ip: '0.0.0.0',
-        //     port: '5011',
-        //     url: ' ',
-        //     proto:'UDP',
-        //     desc: ' ',
-        //     create_time: '2020-01-03 16:16:27',
-        //     update_time: '2020-01-03 16:16:27'
-        // }
-        // ]
       }
     },
     created() {
