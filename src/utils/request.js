@@ -28,7 +28,6 @@ service.interceptors.response.use(
   * code为非200是抛错 可结合自己业务进行修改
   */
     const res = response.data
-    debugger
     if (response.status !== 200) {
       Message({
         message: res.message,
