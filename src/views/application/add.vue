@@ -28,14 +28,22 @@
           v-model="user.note"
           :autosize="true"></el-input>
       </el-form-item>
-       <el-form-item label="应用解析函数">
-        <el-input
-          placeholder="请输入内容"
-          type="textarea"
-          v-model="user.note"
-          :autosize="true"></el-input>
+      <el-form-item label = "应用解析函数">
+     <el-upload
+      class="upload-demo"
+      action="uploadFile()"
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      multiple
+      :limit="3"
+      :on-exceed="handleExceed"
+      :file-list="fileList"
+      accept=".py, .go">
+      <el-button size="small" >点击上传应用解析函数</el-button>
+      <div slot="tip" class="el-upload__tip">只能上传python/go文件，且不超过500kb</div>
+     </el-upload> 
       </el-form-item>
-      
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>
@@ -70,11 +78,11 @@
         user: Object.assign({}, defaultUser),
         rules: {
           appname: [
-            {required: true, message: '请输入用户名称', trigger: 'blur'},
+            {required: true, message: '请输入应用名称', trigger: 'blur'},
             {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
           ],
           proto: [
-            {required: true, message: '请输入密码', trigger: 'blur'},
+            {required: true, message: '请选择使用的网络协议', trigger: 'blur'},
           ]
         }
       }
@@ -132,6 +140,9 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
         this.user = Object.assign({}, defaultUser);
+      },
+      uploadFile(){
+        return 
       }
     }
   }
