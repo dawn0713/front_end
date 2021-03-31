@@ -28,6 +28,13 @@
           v-model="user.note"
           :autosize="true"></el-input>
       </el-form-item>
+       <el-form-item label="应用解析函数">
+        <el-input
+          placeholder="请输入内容"
+          type="textarea"
+          v-model="user.note"
+          :autosize="true"></el-input>
+      </el-form-item>
       
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
