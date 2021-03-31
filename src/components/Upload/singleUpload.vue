@@ -1,7 +1,7 @@
 <template> 
   <div>
     <el-upload
-      action="http://dawn2-oss.oss-cn-beijing.aliyuncs.com"
+      action="http://127.0.0.1:8000/upload/"
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"

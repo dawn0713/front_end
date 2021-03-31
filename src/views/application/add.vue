@@ -1,8 +1,8 @@
 <template>
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
-      <el-form-item label="应用名称" prop="appname">
-        <el-input v-model="user.appname"></el-input>
+      <el-form-item label="应用名称" prop="name">
+        <el-input v-model="user.name"></el-input>
       </el-form-item>
       <el-form-item label="IP">
         <el-input v-model="user.ip"></el-input>
@@ -30,14 +30,7 @@
       </el-form-item>
       <el-form-item label = "应用解析函数">
      <el-upload
-      class="upload-demo"
-      action="uploadFile()"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="3"
-      :on-exceed="handleExceed"
+      action="http://127.0.0.1:8000/upload/"
       :file-list="fileList"
       accept=".py, .go">
       <el-button size="small" >点击上传应用解析函数</el-button>
@@ -53,10 +46,9 @@
 </template>
 
 <script>
-  import SingleUpload from '@/components/Upload/singleUpload';
-  import { createUser, getUser, updateUser } from "@/api/user";
-  const defaultUser={
-    appname: '',
+  import { createApplication, getApplication, updateApplication } from "@/api/application";
+  const defaultApplication={
+    name: '',
     ip: '',
     port: '',
     url: '',
@@ -65,7 +57,7 @@
     status: 0
   };
   export default {
-    name: 'UserDetail',
+    name: 'ApplicationDetail',
     components:{SingleUpload},
     props: {
       isEdit: {
@@ -75,25 +67,25 @@
     },
     data() {
       return {
-        user: Object.assign({}, defaultUser),
+        user: Object.assign({}, defaultApplication),
         rules: {
           appname: [
-            {required: true, message: '请输入应用名称', trigger: 'blur'},
+            {required: true, message: '请输入用户名称', trigger: 'blur'},
             {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
           ],
           proto: [
-            {required: true, message: '请选择使用的网络协议', trigger: 'blur'},
+            {required: true, message: '请输入密码', trigger: 'blur'},
           ]
         }
       }
     },
     created() {
       if(this.isEdit) {
-        getUser(this.$route.query.id).then(response => {
+        getApplication(this.$route.query.id).then(response => {
           this.user = response.data;
         });
       }else{
-        this.user = Object.assign({}, defaultUser);
+        this.user = Object.assign({}, defaultApplication);
       }
     },
     methods: {
@@ -116,9 +108,9 @@
                   this.$router.back();
                 });
               } else {
-                createUser(this.user).then(response => {
+                createApplication(this.user).then(response => {
                   this.$refs[formName].resetFields();
-                  this.user = Object.assign({},defaultUser);
+                  this.user = Object.assign({},defaultApplication);
                   this.$message({
                     message: '提交成功',
                     type: 'success',
@@ -139,15 +131,11 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-        this.user = Object.assign({}, defaultUser);
+        this.user = Object.assign({}, defaultApplication);
       },
-      uploadFile(){
-        return 
-      }
     }
   }
 </script>
-
 <style>
 
 </style>
