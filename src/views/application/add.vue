@@ -140,18 +140,16 @@
       resetForm(formName) {
         this.$refs[formName].resetFields();
         this.user = Object.assign({}, defaultUser);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
       },
       uploadFile(){
         return 
->>>>>>> parent of cb57953... update upload
-=======
       },
       uploadFile(){
         return 
->>>>>>> parent of cb57953... update upload
+
+      },
+      uploadFile(){
+        return 
       }
     }
   }
