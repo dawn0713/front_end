@@ -1,8 +1,8 @@
 <template>
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
-      <el-form-item label="应用名称" prop="name">
-        <el-input v-model="user.name"></el-input>
+      <el-form-item label="应用名称" prop="appname">
+        <el-input v-model="user.appname"></el-input>
       </el-form-item>
       <el-form-item label="IP">
         <el-input v-model="user.ip"></el-input>
@@ -28,19 +28,6 @@
           v-model="user.note"
           :autosize="true"></el-input>
       </el-form-item>
-
-      <el-form-item label = "应用解析函数">
-     <el-upload
-        action="http"
-        :headers="headers"
-        :before-upload="beforeUpload"
-        :file-list="fileList"
-        accept=".py, .go">
-        <el-button size="small" >点击上传应用解析函数</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传python/go文件，且不超过500KB</div>
-     </el-upload> 
-      </el-form-item>
-
       
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
@@ -52,9 +39,9 @@
 
 <script>
   import SingleUpload from '@/components/Upload/singleUpload';
-  import { createApplication, getApplication, updateApplication } from "@/api/application";
-  const defaultApplication={
-    name: '',
+  import { createUser, getUser, updateUser } from "@/api/user";
+  const defaultUser={
+    appname: '',
     ip: '',
     port: '',
     url: '',
@@ -63,7 +50,7 @@
     status: 0
   };
   export default {
-    name: 'ApplicationDetail',
+    name: 'UserDetail',
     components:{SingleUpload},
     props: {
       isEdit: {
@@ -73,7 +60,7 @@
     },
     data() {
       return {
-        user: Object.assign({}, defaultApplication),
+        user: Object.assign({}, defaultUser),
         rules: {
           appname: [
             {required: true, message: '请输入用户名称', trigger: 'blur'},
@@ -82,17 +69,16 @@
           proto: [
             {required: true, message: '请输入密码', trigger: 'blur'},
           ]
-        },
-        headers:{"Access-Control-Allow-Origin":"*"}
+        }
       }
     },
     created() {
       if(this.isEdit) {
-        getApplication(this.$route.query.id).then(response => {
+        getUser(this.$route.query.id).then(response => {
           this.user = response.data;
         });
       }else{
-        this.user = Object.assign({}, defaultApplication);
+        this.user = Object.assign({}, defaultUser);
       }
     },
     methods: {
@@ -115,9 +101,9 @@
                   this.$router.back();
                 });
               } else {
-                createApplication(this.user).then(response => {
+                createUser(this.user).then(response => {
                   this.$refs[formName].resetFields();
-                  this.user = Object.assign({},defaultApplication);
+                  this.user = Object.assign({},defaultUser);
                   this.$message({
                     message: '提交成功',
                     type: 'success',
@@ -138,18 +124,12 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-        this.user = Object.assign({}, defaultApplication);
-      },
-      beforeUpload(file) {
-        this.$http.post("http://127.0.0.1:7082/upload/jupiter/txt", {
-          file:file
-        }).then((res) => {
-          console.log(res)
-        })
+        this.user = Object.assign({}, defaultUser);
       }
     }
   }
 </script>
+
 <style>
 
 </style>
