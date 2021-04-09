@@ -1,7 +1,8 @@
 <template> 
   <div>
     <el-upload
-      action="http://127.0.0.1:8000/upload/"
+      action="http://127.0.0.1:7082/upload/jupiter/txt"
+      headers="Access-Control-Allow-Origin"
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"

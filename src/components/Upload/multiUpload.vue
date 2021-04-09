@@ -1,7 +1,7 @@
 <template> 
   <div>
     <el-upload
-      action="http://dawn-oss.oss-cn-beijing.aliyuncs.com"
+      action="http://127.0.0.1:7082/upload/jupiter/txt"
       :data="dataObj"
       list-type="picture-card"
       :file-list="fileList"

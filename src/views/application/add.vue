@@ -30,11 +30,13 @@
       </el-form-item>
       <el-form-item label = "应用解析函数">
      <el-upload
-      action="http://127.0.0.1:8000/upload/"
-      :file-list="fileList"
-      accept=".py, .go">
-      <el-button size="small" >点击上传应用解析函数</el-button>
-      <div slot="tip" class="el-upload__tip">只能上传python/go文件，且不超过500kb</div>
+        action="http"
+        :headers="headers"
+        :before-upload="beforeUpload"
+        :file-list="fileList"
+        accept=".py, .go">
+        <el-button size="small" >点击上传应用解析函数</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传python/go文件，且不超过500KB</div>
      </el-upload> 
       </el-form-item>
       <el-form-item>
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+  import SingleUpload from '@/components/Upload/singleUpload';
   import { createApplication, getApplication, updateApplication } from "@/api/application";
   const defaultApplication={
     name: '',
@@ -76,7 +79,8 @@
           proto: [
             {required: true, message: '请输入密码', trigger: 'blur'},
           ]
-        }
+        },
+        headers:{"Access-Control-Allow-Origin":"*"}
       }
     },
     created() {
@@ -133,6 +137,13 @@
         this.$refs[formName].resetFields();
         this.user = Object.assign({}, defaultApplication);
       },
+      beforeUpload(file) {
+        this.$http.post("http://127.0.0.1:7082/upload/jupiter/txt", {
+          file:file
+        }).then((res) => {
+          console.log(res)
+        })
+      }
     }
   }
 </script>
