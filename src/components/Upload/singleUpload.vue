@@ -1,20 +1,8 @@
 <template> 
   <div>
     <el-upload
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       action="http://127.0.0.1:7082/upload/jupiter/txt"
       headers="Access-Control-Allow-Origin"
-=======
-      action="http://dawn2-oss.oss-cn-beijing.aliyuncs.com"
->>>>>>> parent of cb57953... update upload
-=======
-      action="http://dawn2-oss.oss-cn-beijing.aliyuncs.com"
->>>>>>> parent of cb57953... update upload
-=======
-      action="http://dawn2-oss.oss-cn-beijing.aliyuncs.com"
->>>>>>> parent of cb57953... update upload
       :data="dataObj"
       list-type="picture"
       :multiple="false" :show-file-list="showFileList"

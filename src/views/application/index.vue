@@ -184,12 +184,12 @@
         this.getList();
       },
       handleViewOrder(index, row){
-        this.$router.push({path:'/application/appDetail',query:{id:row.id}})
+        this.$router.push({path:'/application/appDetail',query:{id:row.app_id}})
       },
       handleDeleteOrder(index, row){
         let ids=[];
-        ids.push(row.id);
-        this.deleteOrder(ids);
+        ids.push(row.app_id);
+        this.deleteApplication(ids);
       },
       handleSizeChange(val){
         this.listQuery.pageNum = 1;
@@ -209,15 +209,15 @@
           this.total = response.data.total;
         });
       },
-      deleteOrder(ids){
+      deleteApplication(ids){
         this.$confirm('是否要进行该删除操作?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           let params = new URLSearchParams();
-          params.append("ids",ids);
-          deleteOrder(params).then(response=>{
+          params.append("app_id",ids);
+          deleteApplication(params).then(response=>{
             this.$message({
               message: '删除成功！',
               type: 'success',

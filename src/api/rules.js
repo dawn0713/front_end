@@ -1,6 +1,5 @@
 import request from '@/utils/request'
 export function fetchList(params) {
-    debugger
     return request({
         url:'/api_proxy/rule_engine/rule_list/',
         method:'get',
@@ -8,10 +7,33 @@ export function fetchList(params) {
   })
 }
 
-export function deleteApplication(params) {
+export function deleteRules(params) {
     return request({
         url:'/api_proxy/rule_engine/rule/',
         method:'delete',
         params:params
+    })
+}
+
+export function createRules(data) {
+    return request({
+        url: '/api_proxy/rule_engine/rule/',
+        method: 'post',
+        data: data
+    })
+}
+
+
+export function getRules(id) {
+    return request({
+        url: '/api_proxy/rule_engine/rule/'+id,
+        method: 'get'
+    })
+}
+export function updateRules(id,data) {
+    return request({
+        url: '/api_proxy/rule_engine/rule/'+id,
+        method: 'post',
+        data:data
     })
 }

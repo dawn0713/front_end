@@ -1,8 +1,8 @@
 <template>
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
-      <el-form-item label="应用名称" prop="appname">
-        <el-input v-model="user.appname"></el-input>
+      <el-form-item label="应用名称" prop="name">
+        <el-input v-model="user.name"></el-input>
       </el-form-item>
       <el-form-item label="IP">
         <el-input v-model="user.ip"></el-input>
@@ -54,9 +54,9 @@
 
 <script>
   import SingleUpload from '@/components/Upload/singleUpload';
-  import { createUser, getUser, updateUser } from "@/api/user";
+  import { createApplication, getApplication, updateApplication } from "@/api/application";
   const defaultUser={
-    appname: '',
+    name: '',
     ip: '',
     port: '',
     url: '',
@@ -77,7 +77,7 @@
       return {
         user: Object.assign({}, defaultUser),
         rules: {
-          appname: [
+          name: [
             {required: true, message: '请输入应用名称', trigger: 'blur'},
             {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
           ],
@@ -89,7 +89,7 @@
     },
     created() {
       if(this.isEdit) {
-        getUser(this.$route.query.id).then(response => {
+        getApplication(this.$route.query.id).then(response => {
           this.user = response.data;
         });
       }else{
@@ -106,7 +106,7 @@
               type: 'warning'
             }).then(() => {
               if (this.isEdit) {
-                updateUser(this.$route.query.id, this.user).then(response => {
+                updateApplication(this.$route.query.id, this.user).then(response => {
                   this.$refs[formName].resetFields();
                   this.$message({
                     message: '修改成功',
@@ -116,7 +116,7 @@
                   this.$router.back();
                 });
               } else {
-                createUser(this.user).then(response => {
+                createApplication(this.user).then(response => {
                   this.$refs[formName].resetFields();
                   this.user = Object.assign({},defaultUser);
                   this.$message({
