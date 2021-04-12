@@ -9,7 +9,7 @@ export function fetchList(params) {
 
 export function deleteApplication(params) {
     return request({
-        url:'/api_proxy/apps/apps/',
+        url:'/api_proxy/notifiers/notifiers_list/',
         method:'delete',
         params:params
     })

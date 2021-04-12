@@ -2,18 +2,9 @@
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
       <el-form-item label="名称" prop="notifiername">
-        <el-input v-model="user.appname"></el-input>
+        <el-input v-model="user.name"></el-input>
       </el-form-item>
-      <!-- <el-form-item label="通知类型">
-        <el-input v-model="user.ip"></el-input>
-      </el-form-item>
-      <el-form-item label="端口号">
-        <el-input v-model="user.port"></el-input>
-      </el-form-item>
-      <el-form-item label="url">
-        <el-input v-model="user.url"></el-input>
-      </el-form-item> -->
-      <el-form-item label="通知类型" placeholder="请选择通知类型" prop="type">
+      <!-- <el-form-item label="通知类型" placeholder="请选择通知类型" prop="type">
         <el-select v-model="user.proto">
           <el-option label="邮箱通知" value="email"></el-option>
           <el-option label="短信通知" value="sms"></el-option>
@@ -21,15 +12,124 @@
           <el-option label="语音通知" value="voice"></el-option>
           <el-option label="第三方通知" value="webhook"></el-option>
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="描述">
         <el-input
           placeholder="请输入内容"
           type="textarea"
-          v-model="user.note"
+          v-model="user.desc"
           :autosize="true"></el-input>
       </el-form-item>
-      
+      <el-form-item label="通知类型">
+        <el-button type="text" @click="dialogFormVisible = true" v-model="user.notifier_type">邮箱通知</el-button>
+          <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+          <el-form :model="user">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="user.appname" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-select v-model="user.ip" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="resetForm('userForm')">重置</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
+          </div>
+          </el-dialog>
+        <el-button type="text" @click="dialogFormVisible = true" v-model="user.notifier_type">短信通知</el-button>
+          <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+          <el-form :model="user">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="user.appname" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-select v-model="user.ip" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="resetForm('userForm')">重置</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
+          </div>
+          </el-dialog>
+        <el-button type="text" @click="dialogFormVisible = true" v-model="user.notifier_type">语音通知</el-button>
+          <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+          <el-form :model="user">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="user.appname" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-select v-model="user.ip" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="resetForm('userForm')">重置</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
+          </div>
+          </el-dialog>
+        <el-button type="text" @click="dialogFormVisible = true" v-model="user.notifier_type">微信通知</el-button>
+          <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+          <el-form :model="user">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="user.appname" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-select v-model="user.ip" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="resetForm('userForm')">重置</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
+          </div>
+          </el-dialog>
+        <el-button type="text" @click="dialogFormVisible = true" v-model="user.notifier_type">第三方通知</el-button>
+          <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+          <el-form :model="user">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="user.appname" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-select v-model="user.ip" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="resetForm('userForm')">重置</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
+          </div>
+          </el-dialog>
+        <el-button type="text" @click="dialogFormVisible = true" v-model="user.notifier_type">APP通知</el-button>
+          <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+          <el-form :model="user">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="user.appname" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-select v-model="user.ip" placeholder="请选择活动区域">
+                <el-option label="区域一" value="shanghai"></el-option>
+                <el-option label="区域二" value="beijing"></el-option>
+              </el-select>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="resetForm('userForm')">重置</el-button>
+            <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
+          </div>
+          </el-dialog>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>
@@ -42,11 +142,11 @@
   import SingleUpload from '@/components/Upload/singleUpload';
   import { createUser, getUser, updateUser } from "@/api/user";
   const defaultUser={
-    appname: '',
-    ip: '',
+    name: '',
+    notifier_type: '',
     port: '',
     url: '',
-    note: '',
+    desc: '',
     proto: '',
     status: 0
   };
@@ -70,7 +170,9 @@
           type: [
             {required: true, message: '请选择通知类型', trigger: 'blur'},
           ]
-        }
+        },
+        formLabelWidth: '120px',
+        dialogFormVisible: false,
       }
     },
     created() {
