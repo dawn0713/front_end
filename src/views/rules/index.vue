@@ -89,7 +89,7 @@
             <el-button
               size="mini"
               @click="handleViewOrder(scope.$index, scope.row)"
-            >编辑调试</el-button>
+            >查看</el-button>
             <el-button
               size="mini"
               @click="handleViewOrder(scope.$index, scope.row)"
@@ -98,7 +98,7 @@
               size="mini"
               type="danger"
               @click="handleDeleteOrder(scope.$index, scope.row)"
-              >删除规则</el-button>
+              >删除</el-button>
           </template>
         </el-table-column>
       </el-table>

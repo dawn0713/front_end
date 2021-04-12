@@ -79,7 +79,7 @@
     output: '',
     format: '',
     timerange: '',
-    is_used: 1,
+    is_used: true,
   };
   export default {
     name: 'UserDetail',

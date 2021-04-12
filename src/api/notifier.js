@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 export function fetchList(params) {
     return request({
-        url:'/api_proxy/notifier/notifier_list/',
+        url:'/api_proxy/notifiers/notifiers_list/',
         method:'get',
         params:params
   })
