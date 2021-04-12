@@ -32,7 +32,7 @@ export function getApplication(id) {
 export function updateApplication(id,data) {
     return request({
         url: '/api_proxy/apps/apps/'+id,
-        method: 'post',
+        method: 'put',
         data:data
     })
 }
