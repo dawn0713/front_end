@@ -154,11 +154,17 @@ export const constantRouterMap = [
     name: 'account',
     meta: {title:'账号管理'},
     children:[{
-      path: 'application_list',
-      name: 'application_list',
-      component: () => import('@/views/application/index'),
-      meta: {title: '账号管理'}
-      }
+      path: 'account_list',
+      name: 'account_list',
+      component: () => import('@/views/account/index'),
+      meta: {title: '账号列表'}
+      },
+      {
+        path: 'account_add',
+        name: 'account_add',
+        component: () => import('@/views/account/add'),
+        meta: {title: '添加账号'}
+      },
     ]
   },
   {path: '*', redirect: '/404', hidden: true}

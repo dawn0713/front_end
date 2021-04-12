@@ -21,7 +21,7 @@
           :autosize="true"></el-input>
       </el-form-item>
       <el-form-item label="通知类型">
-        <el-button type="text" @click="dialogEmailVisible = true" v-model="user.notifier_type">邮箱通知</el-button>
+        <el-button type="text" @click="dialogEmailVisible = true, user.notifier_type = 'email'" v-model="user.notifier_type">邮箱通知</el-button>
           <el-dialog title="邮箱信息" :visible.sync="dialogEmailVisible">
           <el-form :model="user.email">
             <el-form-item label="发件地址" :label-width="formLabelWidth">
@@ -45,7 +45,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog>
-        <el-button type="text" @click="dialogSmsVisible = true" v-model="user.notifier_type">短信通知</el-button>
+        <el-button type="text" @click="dialogSmsVisible = true, user.notifier_type = 'sms'" v-model="user.notifier_type">短信通知</el-button>
           <el-dialog title="短信信息" :visible.sync="dialogSmsVisible">
           <el-form :model="user.sms">
             <el-form-item label="手机号码" :label-width="formLabelWidth">
@@ -63,7 +63,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog>
-        <el-button type="text" @click="dialogVoiceVisible = true" v-model="user.notifier_type">语音通知</el-button>
+        <el-button type="text" @click="dialogVoiceVisible = true, user.notifier_type = 'voice'" v-model="user.notifier_type">语音通知</el-button>
           <el-dialog title="语音信息" :visible.sync="dialogVoiceVisible">
           <el-form :model="user">
             <el-form-item label="活动名称" :label-width="formLabelWidth">
@@ -81,7 +81,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog>
-        <el-button type="text" @click="dialogWechatVisible = true" v-model="user.notifier_type">微信通知</el-button>
+        <el-button type="text" @click="dialogWechatVisible = true, user.notifier_type = 'wechat'" v-model="user.notifier_type">微信通知</el-button>
           <el-dialog title="微信信息" :visible.sync="dialogWechatVisible">
           <el-form :model="user">
             <el-form-item label="活动名称" :label-width="formLabelWidth">
@@ -99,7 +99,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog>
-        <el-button type="text" @click="dialogWebhookVisible = true" v-model="user.notifier_type">第三方通知</el-button>
+        <el-button type="text" @click="dialogWebhookVisible = true, user.notifier_type = 'webhook'" v-model="user.notifier_type">第三方通知</el-button>
           <el-dialog title="第三方信息" :visible.sync="dialogWebhookVisible">
           <el-form :model="user">
             <el-form-item label="活动名称" :label-width="formLabelWidth">
@@ -117,7 +117,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog>
-        <el-button type="text" @click="dialogAppVisible = true" v-model="user.notifier_type">APP通知</el-button>
+        <el-button type="text" @click="dialogAppVisible = true, user.notifier_type = 'app'" v-model="user.notifier_type">APP通知</el-button>
           <el-dialog title="APP信息" :visible.sync="dialogAppVisible">
           <el-form :model="user">
             <el-form-item label="活动名称" :label-width="formLabelWidth">
@@ -152,10 +152,10 @@
     notifier_type: '',
     desc: '',
     email: {
-      recivier: '',
+      receiver: '',
       smtp_server: '',
       authcode:'',
-      passoword: '',
+      password: '',
       send_adderss: ''
     },
     sms: {
