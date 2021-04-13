@@ -25,7 +25,7 @@
           <el-input placeholder="数据值" type="textarea" v-model="user.origin" :autosize="true"></el-input>        
         </el-form-item> -->
       <!-- </div> -->
-      <el-form-item label="数据来源" prop="origin" >
+      <el-form-item label="数据来源" prop="origin">
         <el-table :data="user.dynamicItem"
                   style="width: 80%" border>
           <el-table-column
@@ -33,7 +33,7 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.count"></el-input>
+              <el-input v-model="scope.user.origin"></el-input>
             </template>
           </el-table-column>
           <el-table-column
@@ -41,15 +41,15 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-              <el-input label="test" v-model="scope.row.discount"></el-input>
+              <el-input v-model="scope.user.origin"></el-input>
             </template>
           </el-table-column>
           <el-table-column
             align="center"
             label="操作">
             <template slot-scope="scope">
-              <el-button type="text" @click="handleRemoveProductLadder(scope.$index, scope.row)">删除</el-button>
-              <el-button type="text" @click="handleAddProductLadder(scope.$index, scope.row)">添加</el-button>
+              <el-button type="text" @click="deleteItem(scope.$index, scope.row)">删除</el-button>
+              <el-button type="text" @click="addItem(scope.$index, scope.row)">添加</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -120,11 +120,7 @@
     format: '',
     timerange: '',
     is_used: true,
-    dynamicItem: [{
-            count: '',
-            discount: '',
-            price: ''
-          }]
+    dynamicItem: []
   };
   export default {
     name: 'UserDetail',
@@ -138,6 +134,11 @@
     data() {
       return {
         user: Object.assign({}, defaultUser),
+        form: {
+        name: '',
+        phone: '',
+        dynamicItem: []
+},
         scrollHeight:'0px',
         rules: {
           appname: [
@@ -206,30 +207,44 @@
           }
         });
       },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+        this.user = Object.assign({}, defaultUser);
+      },
+      addItem () {
+      this.form.dynamicItem.push({
+        name: '',
+        phone: ''
+      })
+    },
+      deleteItem (item, index) {
+      this.form.dynamicItem.splice(index, 1)
+      }
+    },
+    // mounted(){
+    //     this.scrollHeight = window.innerHeight*0.7 + 'px';
+    // }
     handleRemoveProductLadder(index, row) {
-        let dynamicItem = this.user.dynamicItem;
-        if (dynamicItem.length === 1) {
-          dynamicItem.pop();
-          dynamicItem.push({
+        let productLadderList = this.value.productLadderList;
+        if (productLadderList.length === 1) {
+          productLadderList.pop();
+          productLadderList.push({
             count: 0,
             discount: 0,
             price: 0
           })
         } else {
-          dynamicItem.splice(index, 1);
+          productLadderList.splice(index, 1);
         }
       },
       handleAddProductLadder(index, row) {
-        let dynamicItem = this.user.dynamicItem;
-        console.log(dynamicItem);
-        if (dynamicItem.length < 3) {
-          console.log('yes');
-          dynamicItem.push({
+        let productLadderList = this.value.productLadderList;
+        if (productLadderList.length < 3) {
+          productLadderList.push({
             count: 0,
             discount: 0,
             price: 0
-          });
-          console.log(dynamicItem);
+          })
         } else {
           this.$message({
             message: '最多只能添加三条',
@@ -237,12 +252,6 @@
           });
         }
       },
-
-    },
-    // mounted(){
-    //     this.scrollHeight = window.innerHeight*0.7 + 'px';
-    // }
-
 
   }
 </script>
@@ -261,11 +270,4 @@
         
       } */
 }
-
-</style>
-
-<style scoped>
-  .littleMargin {
-    margin-top: 10px;
-  }
 </style>

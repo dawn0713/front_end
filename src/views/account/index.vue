@@ -23,6 +23,9 @@
           <el-form-item label="用户名">
             <el-input v-model="listQuery.appName" class="input-width" placeholder="用户名称"></el-input>
           </el-form-item>
+          <el-form-item label="账户名">
+            <el-input v-model="listQuery.appName" class="input-width" placeholder="账户名称"></el-input>
+          </el-form-item>          
           <el-form-item label="创建时间：">
             <el-date-picker
               class="input-width"
@@ -47,6 +50,9 @@
                 v-loading="listLoading" border>
         <el-table-column prop="id" label="序号"  align="center">
             <template slot-scope="scope">{{scope.row.id}}</template>
+        </el-table-column>
+        <el-table-column prop="name" label="用户名称"  align="center">
+            <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
         <el-table-column prop="name" label="账号名称"  align="center">
             <template slot-scope="scope">{{scope.row.account}}</template>

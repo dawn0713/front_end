@@ -28,7 +28,7 @@
           v-model="user.desc"
           :autosize="true"></el-input>
       </el-form-item>
-      <el-form-item label = "应用解析函数">
+      <!-- <el-form-item label = "应用解析函数">
      <el-upload
       class="upload-demo"
       action="uploadFile()"
@@ -43,7 +43,7 @@
       <el-button size="small" >点击上传应用解析函数</el-button>
       <div slot="tip" class="el-upload__tip">只能上传python/go文件，且不超过500kb</div>
      </el-upload> 
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>

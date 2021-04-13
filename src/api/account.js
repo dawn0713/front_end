@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 export function fetchList(params) {
     return request({
-        url:'/api_proxy/apps/apps_list/',
+        url:'/api_proxy/accounts/accounts_list/',
         method:'get',
         params:params
   })

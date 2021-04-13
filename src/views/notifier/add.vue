@@ -23,7 +23,7 @@
       <el-form-item label="通知类型">
         <el-button type="text" @click="dialogEmailVisible = true, user.notifier_type = 'email'" v-model="user.notifier_type">邮箱通知</el-button>
           <el-dialog title="邮箱信息" :visible.sync="dialogEmailVisible">
-          <el-form :model="user.email">
+          <el-form :model="user.email" class="notifierType">
             <el-form-item label="发件地址" :label-width="formLabelWidth">
               <el-input v-model="user.email.send_adderss"></el-input>
             </el-form-item>
@@ -251,5 +251,8 @@
 </script>
 
 <style>
+.el-form-item .el-form-item{
+    margin-bottom: 20px;
+  }
 
 </style>

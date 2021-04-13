@@ -7,11 +7,11 @@
       <el-form-item label="邮箱账号">
         <el-input v-model="user.account"></el-input>
       </el-form-item>
-      <el-form-item label="初始密码">
-        <el-input v-model="user.password"></el-input>
+      <el-form-item label="初始密码" prop="pass">
+        <el-input type="password" v-model="user.pass" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="再次输入密码">
-        <el-input v-model="user.password1"></el-input>
+      <el-form-item label="确认密码" prop="checkPass">
+        <el-input type="password" v-model="user.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="账号类型" placeholder="请选择使用的网络协议" prop="proto">
         <el-select v-model="user.role">
@@ -36,12 +36,12 @@
 
 <script>
   import SingleUpload from '@/components/Upload/singleUpload';
-  import { createApplication, getApplication, updateApplication } from "@/api/application";
+  import { createApplication, getApplication, updateApplication } from "@/api/account";
   const defaultUser={
     name: '',
     account: '',
-    password: '',
-    password1: '',
+    pass: '',
+    checkPass: '',
     role: '',
     desc: ''
   };
@@ -55,6 +55,25 @@
       }
     },
     data() {
+      var validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入密码'));
+        } else {
+          if (this.user.checkPass !== '') {
+            this.$refs.user.validateField('checkPass');
+          }
+          callback();
+        }
+      };
+      var validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.user.pass) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
       return {
         user: Object.assign({}, defaultUser),
         rules: {
@@ -62,8 +81,11 @@
             {required: true, message: '请输入应用名称', trigger: 'blur'},
             {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
           ],
-          proto: [
-            {required: true, message: '请选择使用的网络协议', trigger: 'blur'},
+          pass: [
+            { validator: validatePass, trigger: 'blur' }
+          ],
+          checkPass: [
+            { validator: validatePass2, trigger: 'blur' }
           ]
         }
       }
