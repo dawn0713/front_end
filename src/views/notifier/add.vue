@@ -65,16 +65,17 @@
           </el-dialog>
         <el-button type="text" @click="dialogVoiceVisible = true, user.notifier_type = 'voice'" v-model="user.notifier_type">语音通知</el-button>
           <el-dialog title="语音信息" :visible.sync="dialogVoiceVisible">
-          <el-form :model="user">
-            <el-form-item label="活动名称" :label-width="formLabelWidth">
-              <el-input v-model="user.appname" autocomplete="off"></el-input>
+          <el-form :model="user.voice">
+            <el-form-item label="手机号码" :label-width="formLabelWidth">
+              <el-input v-model="user.voice.phone_num" ></el-input>
             </el-form-item>
-            <el-form-item label="活动区域" :label-width="formLabelWidth">
-              <el-select v-model="user.ip" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
+            <el-form-item label="模板信息" :label-width="formLabelWidth">
+              <el-input v-model="user.voice.temp_code" ></el-input>
             </el-form-item>
+            <el-form-item label="告警类型" :label-width="formLabelWidth">
+              <el-input v-model="user.voice.alarm_type" ></el-input>
+            </el-form-item>            
+
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="resetForm('userForm')">重置</el-button>
@@ -83,15 +84,12 @@
           </el-dialog>
         <el-button type="text" @click="dialogWechatVisible = true, user.notifier_type = 'wechat'" v-model="user.notifier_type">微信通知</el-button>
           <el-dialog title="微信信息" :visible.sync="dialogWechatVisible">
-          <el-form :model="user">
-            <el-form-item label="活动名称" :label-width="formLabelWidth">
-              <el-input v-model="user.appname" autocomplete="off"></el-input>
+          <el-form :model="user.wechat">
+            <el-form-item label="app_id" :label-width="formLabelWidth">
+              <el-input v-model="user.wechat.open_id"></el-input>
             </el-form-item>
-            <el-form-item label="活动区域" :label-width="formLabelWidth">
-              <el-select v-model="user.ip" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
+            <el-form-item label="secret" :label-width="formLabelWidth">
+              <el-input v-model="user.wechat.secret"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -101,15 +99,9 @@
           </el-dialog>
         <el-button type="text" @click="dialogWebhookVisible = true, user.notifier_type = 'webhook'" v-model="user.notifier_type">第三方通知</el-button>
           <el-dialog title="第三方信息" :visible.sync="dialogWebhookVisible">
-          <el-form :model="user">
-            <el-form-item label="活动名称" :label-width="formLabelWidth">
-              <el-input v-model="user.appname" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域" :label-width="formLabelWidth">
-              <el-select v-model="user.ip" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
+          <el-form :model="user.webhook">
+            <el-form-item label="第三方地址" :label-width="formLabelWidth">
+              <el-input v-model="user.webhook.url" autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -118,17 +110,8 @@
           </div>
           </el-dialog>
         <el-button type="text" @click="dialogAppVisible = true, user.notifier_type = 'app'" v-model="user.notifier_type">APP通知</el-button>
-          <el-dialog title="APP信息" :visible.sync="dialogAppVisible">
-          <el-form :model="user">
-            <el-form-item label="活动名称" :label-width="formLabelWidth">
-              <el-input v-model="user.appname" autocomplete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="活动区域" :label-width="formLabelWidth">
-              <el-select v-model="user.ip" placeholder="请选择活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
+          <el-dialog title="APP信息 todo" :visible.sync="dialogAppVisible">
+          <el-form :model="user.app">
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="resetForm('userForm')">重置</el-button>
@@ -136,10 +119,10 @@
           </div>
           </el-dialog>
       </el-form-item>
-      <!-- <el-form-item>
+      <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
         <el-button v-if="!isEdit" @click="resetForm('userForm')">重置</el-button>
-      </el-form-item> -->
+      </el-form-item>
     </el-form>
   </el-card>
 </template>
@@ -162,6 +145,21 @@
       phone_num: '',
       temp_code: '',
       alarm_type: '',
+    },
+    wechat: {
+      app_id: '',
+      secret: ''
+    },
+    voice: {
+      phone_num: '',
+      temp_code: '',
+      alarm_type: '',
+    },
+    webhook: {
+      url: '',
+    },
+    app: {
+      
     }
   };
   export default {

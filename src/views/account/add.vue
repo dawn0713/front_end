@@ -1,48 +1,30 @@
 <template>
   <el-card class="form-container" shadow="never">
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px">
-      <el-form-item label="应用名称" prop="name">
+      <el-form-item label="用户名称" prop="name">
         <el-input v-model="user.name"></el-input>
       </el-form-item>
-      <el-form-item label="IP">
-        <el-input v-model="user.ip"></el-input>
+      <el-form-item label="邮箱账号">
+        <el-input v-model="user.account"></el-input>
       </el-form-item>
-      <el-form-item label="PORT">
-        <el-input v-model="user.port"></el-input>
+      <el-form-item label="初始密码">
+        <el-input v-model="user.password"></el-input>
       </el-form-item>
-      <el-form-item label="URL">
-        <el-input v-model="user.url"></el-input>
+      <el-form-item label="再次输入密码">
+        <el-input v-model="user.password1"></el-input>
       </el-form-item>
-      <el-form-item label="网络协议" placeholder="请选择使用的网络协议" prop="proto">
-        <el-select v-model="user.proto">
-          <el-option label="UDP" value="UDP"></el-option>
-          <el-option label="TCP" value="TCP"></el-option>
-          <el-option label="HTTP" value="HTTP"></el-option>
-          <el-option label="MQTT" value="MQTT"></el-option>
+      <el-form-item label="账号类型" placeholder="请选择使用的网络协议" prop="proto">
+        <el-select v-model="user.role">
+          <el-option label="管理员" value="admin"></el-option>
+          <el-option label="普通用户" value="normal"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="备注">
         <el-input
           placeholder="请输入内容"
           type="textarea"
-          v-model="user.note"
+          v-model="user.desc"
           :autosize="true"></el-input>
-      </el-form-item>
-      <el-form-item label = "应用解析函数">
-     <el-upload
-      class="upload-demo"
-      action="uploadFile()"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :limit="3"
-      :on-exceed="handleExceed"
-      :file-list="fileList"
-      accept=".py, .go">
-      <el-button size="small" >点击上传应用解析函数</el-button>
-      <div slot="tip" class="el-upload__tip">只能上传python/go文件，且不超过500kb</div>
-     </el-upload> 
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
@@ -57,12 +39,11 @@
   import { createApplication, getApplication, updateApplication } from "@/api/application";
   const defaultUser={
     name: '',
-    ip: '',
-    port: '',
-    url: '',
-    note: '',
-    proto: '',
-    status: 0
+    account: '',
+    password: '',
+    password1: '',
+    role: '',
+    desc: ''
   };
   export default {
     name: 'UserDetail',

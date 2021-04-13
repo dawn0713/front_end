@@ -25,7 +25,7 @@
         <el-input
           placeholder="请输入内容"
           type="textarea"
-          v-model="user.note"
+          v-model="user.desc"
           :autosize="true"></el-input>
       </el-form-item>
       <el-form-item label = "应用解析函数">
@@ -60,7 +60,7 @@
     ip: '',
     port: '',
     url: '',
-    note: '',
+    desc: '',
     proto: '',
     status: 0
   };

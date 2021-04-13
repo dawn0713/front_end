@@ -20,11 +20,8 @@
       </div>
       <div style="margin-top: 15px">
         <el-form :inline="true" :model="listQuery" size="small" label-width="140px">
-          <el-form-item label="应用名称">
-            <el-input v-model="listQuery.appName" class="input-width" placeholder="应用名称"></el-input>
-          </el-form-item>
-          <el-form-item label="IP">
-            <el-input v-model="listQuery.ip" class="input-width"></el-input>
+          <el-form-item label="用户名">
+            <el-input v-model="listQuery.appName" class="input-width" placeholder="用户名称"></el-input>
           </el-form-item>
           <el-form-item label="创建时间：">
             <el-date-picker
@@ -35,21 +32,12 @@
               placeholder="请选择时间">
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="网络协议">
-            <el-select v-model="listQuery.proto" class="input-width" placeholder="全部" clearable>
-              <el-option v-for="item in statusOptions"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
         </el-form>
       </div>
     </el-card>
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
-      <span>应用列表</span>
+      <span>账号列表</span>
     </el-card>
     <div class="table-container">
       <el-table 
@@ -58,22 +46,13 @@
                 style="width: 100%;"
                 v-loading="listLoading" border>
         <el-table-column prop="id" label="序号"  align="center">
-            <template slot-scope="scope">{{scope.row.app_id}}</template>
+            <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column prop="name" label="应用名称"  align="center">
-            <template slot-scope="scope">{{scope.row.name}}</template>
+        <el-table-column prop="name" label="账号名称"  align="center">
+            <template slot-scope="scope">{{scope.row.account}}</template>
         </el-table-column>
-        <el-table-column prop="ip" label="IP"  align="center">
-            <template slot-scope="scope">{{scope.row.ip}}</template>
-        </el-table-column>
-        <el-table-column prop="port" label="PORT"  align="center">
-            <template slot-scope="scope">{{scope.row.port}}</template>
-        </el-table-column>
-        <el-table-column prop="url" label="URL"  align="center">
-            <template slot-scope="scope">{{scope.row.url}}</template>
-        </el-table-column>
-        <el-table-column prop="proto" label="网络协议"  align="center">
-            <template slot-scope="scope">{{scope.row.proto}}</template>
+        <el-table-column prop="ip" label="角色"  align="center">
+            <template slot-scope="scope">{{scope.row.role}}</template>
         </el-table-column>
         <el-table-column prop="desc" label="备注" align="center">
             <template slot-scope="scope">{{scope.row.desc}}</template>
@@ -89,12 +68,12 @@
             <el-button
               size="mini"
               @click="handleViewOrder(scope.$index, scope.row)"
-            >查看应用</el-button>
+            >查看详情</el-button>
             <el-button
               size="mini"
               type="danger"
               @click="handleDeleteOrder(scope.$index, scope.row)"
-              >删除应用</el-button>
+              >删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -116,7 +95,7 @@
 
 
 <script>
-  import {fetchList, deleteApplication} from '@/api/application'
+  import {fetchList, deleteApplication} from '@/api/account'
   import {formatDate} from '@/utils/date';
   const defaultListQuery = {
     pageNum: 1,
@@ -152,18 +131,6 @@
             value: 3
           }
         ]
-        // tableData : [{
-        //     id: '1',
-        //     name: 'yudian',
-        //     ip: '0.0.0.0',
-        //     port: '5011',
-        //     url: ' ',
-        //     proto:'UDP',
-        //     desc: ' ',
-        //     create_time: '2020-01-03 16:16:27',
-        //     update_time: '2020-01-03 16:16:27'
-        // }
-        // ]
       }
     },
     created() {
