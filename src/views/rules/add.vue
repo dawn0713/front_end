@@ -1,10 +1,5 @@
 <template>
   <el-card class="form-container" shadow="never">
-       <!-- <el-scrollbar
-        wrapClass="scrollbar-wrap"
-        :style="{height: scrollHeight}"
-        ref="scrollbarContainer"> -->
-
     <el-form :model="user" :rules="rules" ref="userForm" label-width="150px" :show-overflow-tooltip=true>
       <el-form-item label="规则名称" prop="name">
         <el-input v-model="user.name"></el-input>
@@ -182,7 +177,6 @@
         <el-button @click="onSubmit('userForm')">调试规则</el-button>
       </el-form-item> -->
     </el-form>
-    <!-- </el-scrollbar> -->
   </el-card> 
 </template>
 
