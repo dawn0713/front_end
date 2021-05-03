@@ -20,12 +20,12 @@
           <el-input placeholder="数据值" type="textarea" v-model="user.origin" :autosize="true"></el-input>        
         </el-form-item> -->
       <!-- </div> -->
-            <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="format">
+            <!-- <el-form-item label="规则格式" placeholder="请选择规则定义格式" prop="format">
         <el-select v-model="user.format">
           <el-option label="python" value="python"></el-option>
           <el-option label="json" value="json"></el-option>
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="规则有效期">
         <el-date-picker
           v-model="user.timerange"
@@ -35,7 +35,7 @@
           end-placeholder="失效时间">
         </el-date-picker>
       </el-form-item>
-            <el-form-item label="调试数据" :show-overflow-tooltip=true>
+            <!-- <el-form-item label="调试数据" :show-overflow-tooltip=true>
         <el-input
           placeholder="请输入内容"
           type="textarea"
@@ -43,7 +43,7 @@
           :autosize="true"
           >
           </el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item>
         <el-checkbox v-model="user.is_used">是否启用</el-checkbox>
       </el-form-item>
@@ -55,7 +55,7 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-              <el-input v-model="scope.row.count"></el-input>
+              <el-input v-model="user.dynamicItem.field"></el-input>
             </template>
           </el-table-column>
           <el-table-column
@@ -63,7 +63,7 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-                <el-select label="匹配条件" v-model="user.proto">
+                <el-select label="匹配条件" v-model="user.dynamicItem.operator">
                   <el-option label="大于" value="bt"></el-option>
                   <el-option label="小于" value="lt"></el-option>
                   <el-option label="等于" value="eq"></el-option>
@@ -77,7 +77,7 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-              <el-input label="test" v-model="scope.row.discount"></el-input>
+              <el-input label="test" v-model="user.dynamicItem.value"></el-input>
             </template>
           </el-table-column>          
           <el-table-column
@@ -91,20 +91,20 @@
         </el-table>
       </el-form-item> 
       <el-form-item label="数据流向" placeholder="请选择数据流向" prop="type">
-        <el-button type="text" @click="dialogRtEventVisible = true, user.rt_event = 'email'" v-model="user.notifier_type">告警通知</el-button>
+        <el-button type="text" @click="dialogRtEventVisible = true, user.target='rt_event'" v-model="user.target">告警通知</el-button>
           <el-dialog title="告警信息" :visible.sync="dialogRtEventVisible">
-          <el-form :model="user.rt_event.sms">
+          <el-form :model="user.rt_event.notifier_type">
             <el-form-item label="告警类型" :label-width="formLabelWidth">
-                <el-select label="匹配条件" v-model="user.proto">
-                  <el-option label="短信通知" value="bt"></el-option>
-                  <el-option label="微信通知" value="lt"></el-option>
-                  <el-option label="第三方通知" value="eq"></el-option>
-                  <el-option label="APP通知" value="bte"></el-option>
-                  <el-option label="语音通知" value="lte"></el-option>
-                  <el-option label="邮箱通知" value="lte"></el-option>
+                <el-select label="匹配条件" v-model="user.rt_event.notify_type">
+                  <el-option label="短信通知" value="info_notifier_sms"></el-option>
+                  <el-option label="微信通知" value="info_notifier_wechat"></el-option>
+                  <el-option label="第三方通知" value="info_notifier_webhook"></el-option>
+                  <el-option label="APP通知" value="info_notifier_app"></el-option>
+                  <el-option label="语音通知" value="info_notifier_voice"></el-option>
+                  <el-option label="邮箱通知" value="info_notifier_email"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="告警数据ID" :label-width="formLabelWidth">
+            <el-form-item label="通知ID" :label-width="formLabelWidth">
               <el-input v-model="user.rt_event.notify_id" ></el-input>
             </el-form-item>            
           </el-form>
@@ -149,7 +149,7 @@
         <el-button type="text" @click="dialogRtDeviceVisible = true, user.rt_event = 'email'" v-model="user.notifier_type">设备联动</el-button>
           <el-dialog title="设备联动信息" :visible.sync="dialogRtDeviceVisible">
           <el-form :model="user.rt_device.sms">
-            <el-form-item label="设备信息" :label-width="formLabelWidth">
+            <el-form-item label="设备ID" :label-width="formLabelWidth">
               <el-input v-model="user.rt_device.device_id" ></el-input>
             </el-form-item>
             <el-form-item label="指令数据" :label-width="formLabelWidth">
@@ -188,8 +188,10 @@
     origin: '',
     desc: '',
     type: '',
+    target: '',
     rt_event: {
-
+      notify_type: '',
+      notify_id: ''
     },
     rt_nsq: {
 
@@ -204,9 +206,9 @@
     timerange: '',
     is_used: true,
     dynamicItem: [{
-            count: '',
-            discount: '',
-            price: ''
+            field: '',
+            operator: '',
+            value: ''
           }]
   };
   export default {
@@ -223,16 +225,16 @@
         user: Object.assign({}, defaultUser),
         scrollHeight:'0px',
         rules: {
-          appname: [
-            {required: true, message: '请输入规则名称', trigger: 'blur'},
-            {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
-          ],
-          type: [
-            {required: true, message: '匹配条件', trigger: 'blur'},
-          ],
-          format: [
-            {required: true, message: '请选择规则格式', trigger: 'blur'},
-          ]
+          // appname: [
+          //   {required: true, message: '请输入规则名称', trigger: 'blur'},
+          //   {min: 2, max: 140, message: '长度在2-140个字符', trigger: 'blur'}
+          // ],
+          // type: [
+          //   {required: true, message: '匹配条件', trigger: 'blur'},
+          // ],
+          // format: [
+          //   {required: true, message: '请选择规则格式', trigger: 'blur'},
+          // ]
         },
         checked: true,
         value1: [new Date(2020, 10, 10, 10, 10), new Date(2021, 5, 1, 10, 10)],
@@ -327,11 +329,6 @@
       },
 
     },
-    // mounted(){
-    //     this.scrollHeight = window.innerHeight*0.7 + 'px';
-    // }
-
-
   }
 </script>
 
