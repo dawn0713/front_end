@@ -63,7 +63,7 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-                <el-select label="匹配条件" v-model="user.dynamicItem.operator">
+                <el-select label="匹配条件" v-model="user.dynamicItem.operation">
                   <el-option label="大于" value="bt"></el-option>
                   <el-option label="小于" value="lt"></el-option>
                   <el-option label="等于" value="eq"></el-option>
@@ -113,7 +113,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog>
-        <el-button type="text" @click="dialogRtNsqVisible = true, user.rt_event = 'email'" v-model="user.notifier_type">数据转发</el-button>
+        <el-button type="text" @click="dialogRtNsqVisible = true, user.target='rt_nsq'" v-model="user.target">数据转发</el-button>
           <el-dialog title="消息队列信息" :visible.sync="dialogRtNsqVisible">
           <el-form :model="user.rt_nsq.topic">
             <el-form-item label="topic" :label-width="formLabelWidth">
@@ -128,7 +128,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog> 
-        <el-button type="text" @click="dialogRtDbVisible = true, user.rt_event = 'email'" v-model="user.notifier_type">数据存储</el-button>
+        <el-button type="text" @click="dialogRtDbVisible = true, user.target='rt_db'" v-model="user.target">数据存储</el-button>
           <el-dialog title="数据库信息" :visible.sync="dialogRtDbVisible">
           <el-form :model="user.rt_db.db_name">
             <el-form-item label="数据表名称" :label-width="formLabelWidth">
@@ -146,7 +146,7 @@
             <el-button type="primary" @click="onSubmit('userForm')">提交</el-button>
           </div>
           </el-dialog> 
-        <el-button type="text" @click="dialogRtDeviceVisible = true, user.rt_event = 'email'" v-model="user.notifier_type">设备联动</el-button>
+        <el-button type="text" @click="dialogRtDeviceVisible = true, user.target='rt_device'" v-model="user.target">设备联动</el-button>
           <el-dialog title="设备联动信息" :visible.sync="dialogRtDeviceVisible">
           <el-form :model="user.rt_device.sms">
             <el-form-item label="设备ID" :label-width="formLabelWidth">
@@ -190,24 +190,25 @@
     type: '',
     target: '',
     rt_event: {
+      target: 'rt_event',
       notify_type: '',
       notify_id: ''
     },
     rt_nsq: {
-
+      target: 'rt_nsq',
     },
     rt_db: {
-
+      target: 'rt_db',
     },
     rt_device: {
-
+      target: 'rt_device',
     },
     format: '',
     timerange: '',
     is_used: true,
     dynamicItem: [{
             field: '',
-            operator: '',
+            operation: '',
             value: ''
           }]
   };
@@ -301,9 +302,9 @@
         if (dynamicItem.length === 1) {
           dynamicItem.pop();
           dynamicItem.push({
-            count: 0,
-            discount: 0,
-            price: 0
+            field: 0,
+            operation: 0,
+            value: 0
           })
         } else {
           dynamicItem.splice(index, 1);
@@ -315,9 +316,9 @@
         if (dynamicItem.length < 3) {
           console.log('yes');
           dynamicItem.push({
-            count: 0,
-            discount: 0,
-            price: 0
+            field: 0,
+            operation: 0,
+            value: 0
           });
           console.log(dynamicItem);
         } else {
@@ -327,7 +328,10 @@
           });
         }
       },
-
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+        this.user = Object.assign({}, defaultUser);
+      }
     },
   }
 </script>
