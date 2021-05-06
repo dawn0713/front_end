@@ -55,7 +55,8 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-              <el-input v-model="user.dynamicItem.field"></el-input>
+              <!-- <el-input v-model="user.dynamicItem.field"></el-input> -->
+              <el-input v-model="scope.row.field"></el-input>
             </template>
           </el-table-column>
           <el-table-column
@@ -63,7 +64,8 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-                <el-select label="匹配条件" v-model="user.dynamicItem.operation">
+                <!-- <el-select label="匹配条件" v-model="user.dynamicItem.operation"> -->
+                <el-select label="匹配条件" v-model="scope.row.operation">
                   <el-option label="大于" value="bt"></el-option>
                   <el-option label="小于" value="lt"></el-option>
                   <el-option label="等于" value="eq"></el-option>
@@ -77,7 +79,8 @@
             align="center"
             width="120">
             <template slot-scope="scope">
-              <el-input label="test" v-model="user.dynamicItem.value"></el-input>
+              <!-- <el-input label="test" v-model="user.dynamicItem.value"></el-input> -->
+              <el-input label="test" v-model="scope.row.value"></el-input>
             </template>
           </el-table-column>          
           <el-table-column
@@ -207,9 +210,9 @@
     timerange: '',
     is_used: true,
     dynamicItem: [{
-            field: '',
-            operation: '',
-            value: ''
+            // field: '0',
+            // operation: 'eq',
+            // value: '0'
           }]
   };
   export default {
@@ -301,11 +304,12 @@
         let dynamicItem = this.user.dynamicItem;
         if (dynamicItem.length === 1) {
           dynamicItem.pop();
-          dynamicItem.push({
-            field: 0,
-            operation: 0,
-            value: 0
-          })
+          // dynamicItem.push({
+          //   field: 0,
+          //   operation: 0,
+          //   value: 0
+          // })
+          dynamicItem.push()
         } else {
           dynamicItem.splice(index, 1);
         }
@@ -314,13 +318,11 @@
         let dynamicItem = this.user.dynamicItem;
         console.log(dynamicItem);
         if (dynamicItem.length < 3) {
-          console.log('yes');
           dynamicItem.push({
             field: 0,
             operation: 0,
             value: 0
           });
-          console.log(dynamicItem);
         } else {
           this.$message({
             message: '最多只能添加三条',
