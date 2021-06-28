@@ -3,19 +3,19 @@
     <el-card class="filter-container" shadow="never">
       <div>
         <i class="el-icon-search"></i>
-        <span>筛选搜索</span>
+        <span><b>筛选搜索</b></span>
         <el-button
           style="float:right"
           type="primary"
           @click="handleSearchList()"
           size="small">
-          查询搜索
+          <b>查询搜索</b>
         </el-button>
         <el-button
           style="float:right;margin-right: 15px"
           @click="handleResetSearch()"
           size="small">
-          重置
+         <b> 重置</b>
         </el-button>
       </div>
       <div style="margin-top: 15px">
@@ -49,40 +49,41 @@
     </el-card>
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets"></i>
-      <span>应用列表</span>
+      <span><b>应用列表</b></span>
     </el-card>
     <div class="table-container">
       <el-table 
                 ref="orderTable"
                 :data="list"
                 style="width: 100%;"
-                v-loading="listLoading" border>
-        <el-table-column prop="id" label="序号"  align="center">
-            <template slot-scope="scope">{{scope.row.app_id}}</template>
+                v-loading="listLoading" border
+                >
+        <el-table-column prop="id" label="序号"  align="center" style="font-weight:bold;">
+            <template slot-scope="scope"><b>{{scope.row.app_id}}</b></template>
         </el-table-column>
-        <el-table-column prop="name" label="应用名称"  align="center">
-            <template slot-scope="scope">{{scope.row.name}}</template>
+        <el-table-column prop="name" label="应用名称"  align="center" style="font-weight:bold;">
+            <template slot-scope="scope"><b>{{scope.row.name}}</b></template>
         </el-table-column>
         <el-table-column prop="ip" label="IP"  align="center">
-            <template slot-scope="scope">{{scope.row.ip}}</template>
+            <template slot-scope="scope"><b>{{scope.row.ip}}</b></template>
         </el-table-column>
         <el-table-column prop="port" label="PORT"  align="center">
-            <template slot-scope="scope">{{scope.row.port}}</template>
+            <template slot-scope="scope"><b>{{scope.row.port}}</b></template>
         </el-table-column>
         <el-table-column prop="url" label="URL"  align="center">
-            <template slot-scope="scope">{{scope.row.url}}</template>
+            <template slot-scope="scope"><b>{{scope.row.url}}</b></template>
         </el-table-column>
         <el-table-column prop="proto" label="网络协议"  align="center">
-            <template slot-scope="scope">{{scope.row.proto}}</template>
+            <template slot-scope="scope"><b>{{scope.row.proto}}</b></template>
         </el-table-column>
         <el-table-column prop="desc" label="备注" align="center">
-            <template slot-scope="scope">{{scope.row.desc}}</template>
+            <template slot-scope="scope"><b>{{scope.row.desc}}</b></template>
         </el-table-column>
         <el-table-column prop="create_time" label="创建时间"  align="center">
-            <template slot-scope="scope">{{scope.row.create_time | formatCreateTime}}</template>
+            <template slot-scope="scope"><b>{{scope.row.create_time | formatCreateTime}}</b></template>
         </el-table-column>
         <el-table-column prop="update_time" label="更新时间"  align="center">
-            <template slot-scope="scope">{{scope.row.update_time | formatCreateTime}}</template>
+            <template slot-scope="scope"><b>{{scope.row.update_time | formatCreateTime}}</b></template>
         </el-table-column>
         <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
@@ -234,4 +235,9 @@
   .input-width {
     width: 203px;
   }
+  <style type="text/css">
+p {
+ font-weight: bold;
+}
+</style>
 </style>

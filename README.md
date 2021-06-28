@@ -36,7 +36,7 @@ vue-element-admin | 项目脚手架参考 | [https://github.com/PanJiaChen/vue-e
 
 ### 项目布局
 
-``` lua
+``` 
 src -- 源码目录
 ├── api -- axios网络请求定义
 ├── assets -- 静态图片资源文件
@@ -52,7 +52,7 @@ src -- 源码目录
     ├── login -- 登录页
     ├── application -- 应用管理页面
     ├── rules -- 数据处理规则管理页面
-    ├── notifier -- 通知页面 
+    ├── notifier -- 通知管理页面 
     ├── account -- 账号管理页面
 ```
 
